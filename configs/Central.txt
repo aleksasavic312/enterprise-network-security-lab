@@ -1,0 +1,3 @@
+! Central running-config
+! Zameni ovaj fajl stvarnim ispisom `show running-config`
+! (vidi configs/README.md)
