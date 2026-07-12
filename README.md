@@ -134,8 +134,7 @@ in **[docs/verification_guide.md](docs/verification_guide.md)**. Quick checks:
 
 > These are **simulation credentials** defined by the assignment, kept here
 > only so the lab is reproducible. They are **not real secrets** and protect
-> nothing outside this Packet Tracer file. In a production repository you would
-> never commit real passwords, keys or pre-shared keys.
+> nothing outside this Packet Tracer file.
 
 | Device / Purpose | Username | Password / Key | Notes |
 |---|---|---|---|
