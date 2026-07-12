@@ -138,11 +138,12 @@ in **[docs/verification_guide.md](docs/verification_guide.md)**. Quick checks:
 
 | Device / Purpose | Username | Password / Key | Notes |
 |---|---|---|---|
-| Router A — local admin | `mixiuser` | `mixiuser12345` | privilege 15, MD5 |
-| Router A — technician role | role `Tech_MIXI` | `techpass` | read-only `show` commands, MD5 |
+| Router A - enter privilege exec mode | / | `cisco` | / |
+| Router A - local admin | `mixiuser` | `mixiuser12345` | privilege 15, MD5 |
+| Router A - technician role | role `Tech_MIXI` | `techpass` | read-only `show` commands, MD5 |
 | S1 — SSH admin | `adminmikana` | `mikana12345` | privilege 15, MD5, domain `mixi.com` |
-| Router B — local fallback | `mikan2` | `mikan2pa55` | used if TACACS+ is unreachable |
-| Router B — TACACS+ shared key | — | `mikica123` | router ↔ TACACS+ server |
+| Router B / local fallback | `mikan2` | `mikan2pa55` | used if TACACS+ is unreachable |
+| Router B / TACACS+ shared key | — | `mikica123` | router ↔ TACACS+ server |
 | Site-to-Site VPN — pre-shared key | — | `vpnpa55` | ISAKMP Phase 1 |
 | ASA — local admin | `mixiadmin` | `mixi123` | AAA local; SSH domain `sshbezbednost.com` |
 
