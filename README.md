@@ -138,7 +138,7 @@ in **[docs/verification_guide.md](docs/verification_guide.md)**. Quick checks:
 
 | Device / Purpose | Username | Password / Key | Notes |
 |---|---|---|---|
-| Router A - enter privilege exec mode | / | `cisco` | / |
+| Router A - enter privileged exec mode | / | `cisco` | / |
 | Router A - local admin | `mixiuser` | `mixiuser12345` | privilege 15, MD5 |
 | Router A - technician role | role `Tech_MIXI` | `techpass` | read-only `show` commands, MD5 |
 | S1 — SSH admin | `adminmikana` | `mikana12345` | privilege 15, MD5, domain `mixi.com` |
@@ -146,5 +146,7 @@ in **[docs/verification_guide.md](docs/verification_guide.md)**. Quick checks:
 | Router B / TACACS+ shared key | — | `mikica123` | router ↔ TACACS+ server |
 | Site-to-Site VPN — pre-shared key | — | `vpnpa55` | ISAKMP Phase 1 |
 | ASA — local admin | `mixiadmin` | `mixi123` | AAA local; SSH domain `sshbezbednost.com` |
+
+To enter privileged EXEC mode on the MIKAN-ASA device, simply press Enter when prompted for a password, as the default password is blank.
 
 ---
