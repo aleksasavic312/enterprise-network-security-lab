@@ -2,8 +2,7 @@
 
 An enterprise network built and secured in Cisco Packet Tracer, spanning the
 access, distribution and perimeter layers. Below is a breakdown of what I
-implemented, grouped by area. The original assignment specification is kept in
-[`zadatak.md`](zadatak.md) for reference.
+implemented, grouped by area.
 
 ## Base configuration & addressing
 
