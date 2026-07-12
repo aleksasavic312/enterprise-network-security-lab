@@ -1,0 +1,153 @@
+! RouterA running-config
+
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname A
+!
+!
+!
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+!
+!
+!
+aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+username mixiuser privilege 15 secret 5 $1$mERr$VuAtCCgt89OuYZZ/AA4Bw.
+!
+!
+license udi pid CISCO2811/K9 sn FTX10175VH2-
+!
+!
+!
+crypto isakmp policy 10
+ encr aes 256
+ authentication pre-share
+ group 5
+ lifetime 36000
+!
+crypto isakmp key vpnpa55 address 209.165.64.225
+!
+!
+!
+crypto ipsec transform-set VPN-SET esp-aes 256 esp-sha-hmac
+!
+crypto map VPN-MAP 10 ipsec-isakmp 
+ ! Incomplete
+ set peer 209.165.64.225
+ set transform-set VPN-SET 
+ match address 110
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+zone security ZAPOSLENI
+zone security KONFERENCIJSKA_SALA
+zone security INTERNET
+!
+!
+interface FastEthernet0/0
+ ip address 172.16.128.1 255.255.255.240
+ zone-member security KONFERENCIJSKA_SALA
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 172.16.224.130 255.255.255.224
+ zone-member security ZAPOSLENI
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Serial0/0/1
+ ip address 209.165.3.225 255.255.255.248
+ zone-member security INTERNET
+ clock rate 64000
+ crypto map VPN-MAP
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router eigrp 10
+ network 172.16.128.0 0.0.0.15
+ network 172.16.224.128 0.0.0.31
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+ip access-list extended MIKAN
+ permit tcp host 209.165.64.226 host 209.165.3.225 eq 22
+ permit icmp host 209.165.64.226 host 172.16.224.131 echo
+ deny eigrp any 172.16.128.0 0.0.0.15
+ deny eigrp any 172.16.224.128 0.0.0.31
+ deny tcp 10.0.0.0 0.255.255.255 host 209.165.3.225 eq 22
+ deny tcp 172.16.0.0 0.15.255.255 host 209.165.3.225 eq 22
+ deny tcp 192.168.0.0 0.0.255.255 host 209.165.3.225 eq 22
+ deny tcp 224.0.0.0 15.255.255.255 host 209.165.3.225 eq 22
+ deny tcp 127.0.0.0 0.255.255.255 host 209.165.3.225 eq 22
+ deny icmp 10.0.0.0 0.255.255.255 172.16.128.0 0.0.0.15 echo
+ deny icmp 172.16.0.0 0.15.255.255 172.16.128.0 0.0.0.15 echo
+ deny icmp 192.168.0.0 0.0.255.255 172.16.128.0 0.0.0.15 echo
+ deny icmp 224.0.0.0 15.255.255.255 172.16.128.0 0.0.0.15 echo
+ deny icmp 127.0.0.0 0.255.255.255 172.16.128.0 0.0.0.15 echo
+ deny icmp 10.0.0.0 0.255.255.255 172.16.224.128 0.0.0.31 echo
+ deny icmp 172.16.0.0 0.15.255.255 172.16.224.128 0.0.0.31 echo
+ deny icmp 192.168.0.0 0.0.255.255 172.16.224.128 0.0.0.31 echo
+ deny icmp 224.0.0.0 15.255.255.255 172.16.224.128 0.0.0.31 echo
+ deny icmp 127.0.0.0 0.255.255.255 172.16.224.128 0.0.0.31 echo
+ permit ip any any
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+!
+!
+parser view TECH_MIKI
+ secret 5 $1$mERr$ZBw0TSPIADE7v.w4kyZMQ1
+ commands exec include show
+ commands exec include show ip
+ commands exec include show ip protocols
+ commands exec include show ip route
+ commands exec include show protocols
+!
+!
+end
